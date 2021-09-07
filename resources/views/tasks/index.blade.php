@@ -43,10 +43,16 @@
                    Done
                 </span>
                         @endif
-
+<br>
                         <small>Last Updated - {{ $task->updated_at->diffForHumans() }}</small>
+                        <br>
+                    <small> Project: {{$task->project->project_name}}</small><br>
+                        <small> Assign to:  {{$task->user->name}}</small>
                     </div>
                     <div class="float-end">
+                        <a  href="{{ route('task.show', $task->id) }}" class="btn btn-secondary">
+                            <i class="fa fa-eye"></i>
+                        </a>
                         <a  href="{{ route('task.edit', $task->id) }}" class="btn btn-success">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -61,10 +67,10 @@
                     </div>
                     <div class="clearfix">
 
+
                     </div>
                 </div>
             </div>
-
             @endforeach
             @if (count($tasks) === 0)
                 <div class="alert alert-danger p-2">
@@ -76,5 +82,10 @@
                     </a>
                 </div>
         @endif
+            <div class="pagination col-lg-12 col-md-12 col-sm-12 text-center">
+                <ul class="pagination" role="navigation">
+                    {{$tasks->links()}}
+                </ul>
+            </div>
 
 @endsection

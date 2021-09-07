@@ -23,23 +23,47 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea type="text" class="form-control" id="description" name="description" rows="5">{{ $task->description }}</textarea>
+                <textarea type="text" class="form-control" id="description" name="description"
+                          rows="5">{{ $task->description }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Status</label>
                 <select name="status" id="status" class="form-control">
                     @foreach ($statuses as $status)
-                        <option value="{{ $status['value'] }}" {{  $task->status === $status['value'] ? 'selected' : '' }}>{{ $status['label'] }}</option>
+                        <option
+                            value="{{ $status['value'] }}" {{  $task->status === $status['value'] ? 'selected' : '' }}>{{ $status['label'] }}</option>
                     @endforeach
                 </select>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Assign to Project <span class="glyphicon glyphicon-pushpin"
+                                                   aria-hidden="true"></span></label>
+                    <select name="project_id" class="selectpicker" data-style="btn-primary" style="width:100%;">
+                        @foreach( $projects as $project )
+                            <option value="{{ $project->id }}">{{ $project->project_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Assign to: <span class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+                    <select id="user" name="user" class="selectpicker" data-style="btn-info" style="width:100%;">
+                        @foreach ( $users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <a href="{{ route('task.index') }}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-left"></i> Cancel</a>
 
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-check"></i>
-                Save
-            </button>
+                <a href="{{ route('task.index') }}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-left"></i>
+                    Cancel</a>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-check"></i>
+                    Save
+                </button>
+            </div>
         </form>
     </div>
+
 @endsection
