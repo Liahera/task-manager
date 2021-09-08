@@ -19,19 +19,24 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group([ 'middleware' => 'auth'], function() {
 
-    Route::get('/logout', function(){
+    Route::get('/logout', function () {
         Auth::logout();
         return redirect(route('login'));
     })->name('logout');
-Route::resource('task', TaskController::class);
-Route::get('/tasks/list/{project_id}',[App\Http\Controllers\TaskController::class, 'taskList'])->name('task.list');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('task', TaskController::class);
+    Route::get('/tasks/list/{project_id}', [App\Http\Controllers\TaskController::class, 'taskList'])->name('task.list');
+    Route::get('/tasks/deletefile/{id}', [App\Http\Controllers\TaskController::class, 'deleteFile'])->name('task.deletefile');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ===================== PROJECTS ======================
-Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('project.show') ;
-Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('project.create') ;
-Route::post('/projects/store', [App\Http\Controllers\ProjectController::class, 'store'])->name('project.store');
-Route::get('/projects/edit/{id}', [App\Http\Controllers\ProjectController::class, 'edit'])->name('project.edit') ;
-Route::post('/projects/update/{id}', [App\Http\Controllers\ProjectController::class, 'update'])->name('project.update') ;
-Route::delete('/projects/delete/{id}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('project.delete') ;
+    Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index'])->name('project.show');
+    Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create'])->name('project.create');
+    Route::post('/projects/store', [App\Http\Controllers\ProjectController::class, 'store'])->name('project.store');
+    Route::get('/projects/edit/{id}', [App\Http\Controllers\ProjectController::class, 'edit'])->name('project.edit');
+    Route::post('/projects/update/{id}', [App\Http\Controllers\ProjectController::class, 'update'])->name('project.update');
+    Route::delete('/projects/delete/{id}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('project.delete');
+
+    Route::get('/download/{file}', [App\Http\Controllers\DownloadsController::class, 'download'])->name('file.download');
+});

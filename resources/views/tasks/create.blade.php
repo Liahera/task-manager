@@ -13,7 +13,7 @@
     </div>
 
     <div class="card card-body bg-light p-4">
-        <form action="{{ route('task.store') }}" method="POST">
+        <form action="{{ route('task.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -49,6 +49,11 @@
                         @endforeach
 
                     </select>
+                </div>
+                <label>Add Project Files (png,gif,jpeg,jpg,txt,pdf,doc) <span class="glyphicon glyphicon-file"
+                                                                              aria-hidden="true"></span></label>
+                <div class="form-group">
+                    <input type="file" class="form-control" name="photos[]" multiple>
                 </div>
 
                 <a href="{{ route('task.index') }}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-left"></i>

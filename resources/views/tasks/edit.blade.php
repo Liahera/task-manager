@@ -13,7 +13,7 @@
     </div>
 
     <div class="card card-body bg-light p-4">
-        <form action="{{ route('task.update', $task->id) }}" method="POST">
+        <form action="{{ route('task.update', $task->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -53,7 +53,26 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Add Project Files (png,gif,jpeg,jpg,txt,pdf,doc) <span class="glyphicon glyphicon-file"
+                                                                                  aria-hidden="true"></span></label>
+                    <input type="file" class="form-control" name="photos[]" multiple>
+                </div>
 
+
+                <div class="form-group">
+                    @if( count($taskfiles) > 0  )
+                        <label>Files</label>
+                        <ul class="fileslist">
+                            @foreach( $taskfiles as $file)
+                                <li>{{ $file->filename }} <span>&nbsp;&nbsp;</span> <a class="btn btn-danger"
+                                                                                       href="{{ route('task.deletefile', [ 'id' => $file->id]) }}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
 
                 <a href="{{ route('task.index') }}" class="btn btn-secondary mr-2"><i class="fa fa-arrow-left"></i>
                     Cancel</a>

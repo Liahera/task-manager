@@ -2,17 +2,22 @@
 
 @section('content')
     <style>
-        .row-cols-4
-        {
-            display:flex;
-            flex-direction:column;
+        .row-cols-4 {
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items:center;
+            align-items: center;
             position: relative;
-            top:-100px;
+            top: -100px;
             right: -400px;
+        }
 
-
+        .panel-primary {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            top: -230px;
+            left: -700px;
 
         }
     </style>
@@ -28,7 +33,7 @@
             <a href="#" class="btn btn-secondary mr-2"><i class="fa fa-arrow-left"></i>
                 Cancel</a>
 
-            <a  href="#" class="btn btn-success">
+            <a href="#" class="btn btn-success">
                 <i class="fa fa-edit"></i>
             </a>
 
@@ -65,7 +70,7 @@
                         <span class="badge rounded-pill bg-success text-white">
                    Done
                 </span>
-                        @endif
+                    @endif
                 </div>
             </div>
             <div class="panel panel-info">
@@ -74,10 +79,34 @@
                     {{ $task_show->created_at }}
                 </div>
             </div>
+            @if( count($images_set) > 0 )
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Uploaded Images</div>
+                    <div class="panel-body">
+                        <ul id="images_col">
+                            @foreach ( $images_set as $image )
+                                <a href="<?php echo asset("images/$image") ?>" data-lightbox="images-set">
+                                    <img class="img-responsive" src="<?php echo asset("images/$image") ?>">
+                                </a>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+            @if( count($files_set) > 0 )
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> Uploaded Files</div>
+                    <div class="panel-body">
+                        <ul id="images_col">
+                            @foreach ( $files_set as $file )
+                                <a target="_blank" href="<?php echo asset("images/$file"); ?>">{{ $file }}</a>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
 
         </div>
-
-
 @endsection
 
 

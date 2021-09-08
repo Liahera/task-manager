@@ -17,6 +17,9 @@ class Task extends Model
     public function user() {
         return $this->belongsTo('App\Models\User') ;
     }
+    public function taskfiles() {
+        return $this->hasMany('App\Models\TaskFiles') ;
+    }
 
 
 
