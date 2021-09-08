@@ -56,6 +56,14 @@ class TaskController extends Controller
         $projects = Project::all() ;
         return view('tasks.show',compact('task_show'));
     }
+    public function taskList( $project_id )
+    {
+        $users =  User::all() ;
+        $project_name = Project::findOrFail($project_id) ;
+        $task_list = Task::where('project_id','=' , $project_id)->get();
+        return view('tasks.list',compact('users','project_name','task_list'));
+    }
+
 
     public function edit($id)
     {

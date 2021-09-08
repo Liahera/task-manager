@@ -20,6 +20,7 @@
     <span class="badge rounded-pill bg-warning text-dark">
                     {{$project->created_at->diffForHumans()}}
                 </span>
+                <a href="{{route('task.list',[ 'project_id' => $project->id ])}}">Task list</a>
                 <div class="float-end">
                     <a  href="{{route('project.edit',[ 'id' => $project->id ])}}" class="btn btn-success">
                         <i class="fa fa-edit"></i>
@@ -37,4 +38,9 @@
             </h5>
         </div>
     @endforeach
+    <div class="pagination col-lg-12 col-md-12 col-sm-12 text-center">
+        <ul class="pagination" role="navigation">
+            {{$projects->links()}}
+        </ul>
+    </div>
 @endsection

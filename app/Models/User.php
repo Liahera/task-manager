@@ -43,12 +43,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function createdTasks()
-    {
-        return $this->hasMany('App\Task', 'creator_id');
-    }
-    public function isAdmin()
-    {
-        return $this->type === self::ADMIN_TYPE;
-    }
 }

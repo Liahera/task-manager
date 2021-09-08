@@ -8,7 +8,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+       // $projects = Project::all()->orderBy('id')->paginate(5);
+        $projects = Project::orderby('id', 'desc')->paginate(5);
         return view('project.index', compact('projects'));
     }
 

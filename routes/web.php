@@ -25,7 +25,7 @@ Auth::routes();
         return redirect(route('login'));
     })->name('logout');
 Route::resource('task', TaskController::class);
-//Route::get('/task/view/{id}',[App\Http\Controllers\ProjectController::class, 'show'])->name('task.show') ;
+Route::get('/tasks/list/{project_id}',[App\Http\Controllers\TaskController::class, 'taskList'])->name('task.list');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // ===================== PROJECTS ======================
